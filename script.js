@@ -154,7 +154,7 @@ function renderLaps() {
   lapTable.classList.remove('hidden');
   lapBody.innerHTML = '';
 
-  if (mode === 'countdown') scoreColHeader.classList.remove('hidden');
+  scoreColHeader.classList.remove('hidden');
 
   const lapTimes = laps.map(l => l.lapTime);
   const maxTime = Math.max(...lapTimes);
@@ -174,11 +174,11 @@ function renderLaps() {
       ? `Q${String(num).padStart(2, '0')}`
       : `#${String(num).padStart(2, '0')}`;
 
-    const scoreCell = mode === 'countdown' ? `
+    const scoreCell = `
       <td class="score-cell">
         <button class="result-btn correct ${l.result === true ? 'active' : ''}" data-idx="${idx}">○</button>
         <button class="result-btn incorrect ${l.result === false ? 'active' : ''}" data-idx="${idx}">✗</button>
-      </td>` : '';
+      </td>`;
 
     tr.innerHTML = `
       <td>${label}</td>
@@ -193,7 +193,7 @@ function renderLaps() {
 }
 
 function updateSaveBtn() {
-  const show = mode === 'countdown' && !running && laps.length > 0 && selectedTopic !== '';
+  const show = !running && laps.length > 0 && selectedTopic !== '';
   saveBtn.classList.toggle('hidden', !show);
 }
 
