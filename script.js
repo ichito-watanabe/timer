@@ -113,6 +113,9 @@ function start() {
 }
 
 function reset() {
+  if (laps.some(l => l.result !== null) && selectedTopic !== '') {
+    commitResults();
+  }
   stop();
   elapsed = 0;
   laps = [];
@@ -197,9 +200,9 @@ function updateSaveBtn() {
   saveBtn.classList.toggle('hidden', !show);
 }
 
-function saveResults() {
+function commitResults() {
   const markedLaps = laps.filter(l => l.result !== null);
-  if (markedLaps.length === 0) return;
+  if (markedLaps.length === 0) return false;
 
   const correct = markedLaps.filter(l => l.result === true).length;
   const session = {
@@ -212,7 +215,11 @@ function saveResults() {
   const history = JSON.parse(localStorage.getItem('spiHistory') || '[]');
   history.push(session);
   localStorage.setItem('spiHistory', JSON.stringify(history));
+  return true;
+}
 
+function saveResults() {
+  if (!commitResults()) return;
   saveBtn.textContent = '保存しました！';
   saveBtn.disabled = true;
   setTimeout(() => {
