@@ -5,6 +5,7 @@ const resetBtn     = document.getElementById('resetBtn');
 const lapTable     = document.getElementById('lapTable');
 const lapBody      = document.getElementById('lapBody');
 const lapColLabel  = document.getElementById('lapColLabel');
+const lapHint      = document.getElementById('lapHint');
 const swModeBtn    = document.getElementById('swMode');
 const cdModeBtn    = document.getElementById('cdMode');
 const cdConfig     = document.getElementById('cdConfig');
@@ -191,6 +192,7 @@ function setMode(newMode) {
     qTracker.classList.add('hidden');
     lapBtn.textContent = 'LAP';
     lapColLabel.textContent = 'ラップ';
+    lapHint.textContent = 'ラップ';
     startBtn.disabled = false;
     display.textContent = '00:00.0';
     countdownDuration = 0;
@@ -202,6 +204,7 @@ function setMode(newMode) {
     qTracker.classList.remove('hidden');
     lapBtn.textContent = '次問';
     lapColLabel.textContent = '時間';
+    lapHint.textContent = '次問';
     display.textContent = '00:00.0';
     countdownDuration = 0;
     startBtn.disabled = true;
@@ -242,9 +245,15 @@ cdModeBtn.addEventListener('click', () => setMode('countdown'));
 document.addEventListener('keydown', e => {
   if (e.code === 'Space') {
     e.preventDefault();
+    document.activeElement?.blur();
     running ? stop() : start();
   } else if (e.code === 'Delete') {
     e.preventDefault();
+    document.activeElement?.blur();
     reset();
+  } else if (e.code === 'Enter') {
+    e.preventDefault();
+    document.activeElement?.blur();
+    if (!lapBtn.disabled) lap();
   }
 });

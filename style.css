@@ -173,10 +173,38 @@ body {
 }
 
 /* ===== Controls ===== */
+.controls-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
 .controls {
   display: flex;
   gap: 20px;
   align-items: center;
+}
+
+.kbd-hints {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 11px;
+  color: #333;
+  letter-spacing: 0.08em;
+}
+
+kbd {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 3px;
+  padding: 1px 6px;
+  font-family: inherit;
+  font-size: 10px;
+  color: #3d3d3d;
+  margin-right: 4px;
 }
 
 .btn {
