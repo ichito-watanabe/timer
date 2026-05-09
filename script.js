@@ -386,5 +386,15 @@ document.addEventListener('keydown', e => {
   } else if (e.key === 'Enter') {
     e.preventDefault();
     if (!lapBtn.disabled) lap();
+  } else if (e.key === 'o' || e.key === 'O') {
+    if (laps.length > 0) {
+      laps[laps.length - 1].result = laps[laps.length - 1].result === true ? null : true;
+      renderLaps();
+    }
+  } else if (e.key === 'x' || e.key === 'X') {
+    if (laps.length > 0) {
+      laps[laps.length - 1].result = laps[laps.length - 1].result === false ? null : false;
+      renderLaps();
+    }
   }
 }, { capture: true });
