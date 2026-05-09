@@ -243,7 +243,6 @@ swModeBtn.addEventListener('click', () => setMode('stopwatch'));
 cdModeBtn.addEventListener('click', () => setMode('countdown'));
 
 document.addEventListener('keydown', e => {
-  console.log('key:', e.key, 'code:', e.code);
   if (e.isComposing) return;
   if (e.key === ' ') {
     e.preventDefault();
