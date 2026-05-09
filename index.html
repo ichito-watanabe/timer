@@ -8,7 +8,28 @@
 </head>
 <body>
   <div class="container">
-    <div class="timer-display" id="display">00:00.0</div>
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="swMode">ストップウォッチ</button>
+      <button class="mode-btn" id="cdMode">カウントダウン</button>
+    </div>
+
+    <div class="display-area">
+      <div class="progress-bar hidden" id="progressBar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="timer-display" id="display">00:00.0</div>
+    </div>
+
+    <div class="cd-config hidden" id="cdConfig">
+      <div class="presets">
+        <button class="preset-btn" data-sec="30">30秒</button>
+        <button class="preset-btn" data-sec="60">1分</button>
+        <button class="preset-btn" data-sec="120">2分</button>
+        <button class="preset-btn" data-sec="1200">英語<small>20分</small></button>
+        <button class="preset-btn" data-sec="1800">言語<small>30分</small></button>
+        <button class="preset-btn" data-sec="2100">非言語<small>35分</small></button>
+      </div>
+    </div>
 
     <div class="controls">
       <button class="btn btn-lap" id="lapBtn" disabled>LAP</button>
@@ -16,12 +37,18 @@
       <button class="btn btn-reset" id="resetBtn">RESET</button>
     </div>
 
+    <div class="q-tracker hidden" id="qTracker">
+      <span id="qCount">0問</span>
+      <span class="q-sep">·</span>
+      <span id="qPace">平均 --</span>
+    </div>
+
     <div class="laps" id="lapsContainer">
       <table id="lapTable" class="hidden">
         <thead>
           <tr>
             <th>#</th>
-            <th>ラップ</th>
+            <th id="lapColLabel">ラップ</th>
             <th>累計</th>
           </tr>
         </thead>
