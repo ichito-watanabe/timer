@@ -247,7 +247,7 @@ document.addEventListener('keydown', e => {
   if (e.key === ' ') {
     e.preventDefault();
     running ? stop() : start();
-  } else if (e.key === 'Delete') {
+  } else if (e.key === 'Delete' || e.key === 'Backspace') {
     e.preventDefault();
     reset();
   } else if (e.key === 'Enter') {
