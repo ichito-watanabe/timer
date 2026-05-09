@@ -242,19 +242,16 @@ resetBtn.addEventListener('click', reset);
 swModeBtn.addEventListener('click', () => setMode('stopwatch'));
 cdModeBtn.addEventListener('click', () => setMode('countdown'));
 
-document.querySelectorAll('button').forEach(btn => {
-  btn.addEventListener('focus', () => btn.blur());
-});
-
 document.addEventListener('keydown', e => {
-  if (e.code === 'Space') {
+  if (e.isComposing) return;
+  if (e.key === ' ') {
     e.preventDefault();
     running ? stop() : start();
-  } else if (e.code === 'Delete') {
+  } else if (e.key === 'Delete') {
     e.preventDefault();
     reset();
-  } else if (e.code === 'Enter') {
+  } else if (e.key === 'Enter') {
     e.preventDefault();
     if (!lapBtn.disabled) lap();
   }
-});
+}, { capture: true });
