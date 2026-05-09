@@ -240,7 +240,6 @@ swModeBtn.addEventListener('click', () => setMode('stopwatch'));
 cdModeBtn.addEventListener('click', () => setMode('countdown'));
 
 document.addEventListener('keydown', e => {
-  if (e.target.tagName === 'BUTTON') return;
   if (e.code === 'Space') {
     e.preventDefault();
     running ? stop() : start();
