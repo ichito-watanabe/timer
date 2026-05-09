@@ -11,57 +11,89 @@
     <div class="mode-toggle">
       <button class="mode-btn active" id="swMode">ストップウォッチ</button>
       <button class="mode-btn" id="cdMode">カウントダウン</button>
+      <button class="mode-btn" id="statsMode">成績</button>
     </div>
 
-    <div class="display-area">
-      <div class="progress-bar hidden" id="progressBar">
-        <div class="progress-fill" id="progressFill"></div>
+    <div id="timerSection">
+      <div class="display-area">
+        <div class="progress-bar hidden" id="progressBar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="timer-display" id="display">00:00.0</div>
       </div>
-      <div class="timer-display" id="display">00:00.0</div>
-    </div>
 
-    <div class="cd-config hidden" id="cdConfig">
-      <div class="presets">
-        <button class="preset-btn" data-sec="30">30秒</button>
-        <button class="preset-btn" data-sec="60">1分</button>
-        <button class="preset-btn" data-sec="120">2分</button>
-        <button class="preset-btn" data-sec="1200">英語<small>20分</small></button>
-        <button class="preset-btn" data-sec="1800">言語<small>30分</small></button>
-        <button class="preset-btn" data-sec="2100">非言語<small>35分</small></button>
+      <div class="cd-config hidden" id="cdConfig">
+        <div class="presets">
+          <button class="preset-btn" data-sec="30">30秒</button>
+          <button class="preset-btn" data-sec="60">1分</button>
+          <button class="preset-btn" data-sec="120">2分</button>
+          <button class="preset-btn" data-sec="1200">英語<small>20分</small></button>
+          <button class="preset-btn" data-sec="1800">言語<small>30分</small></button>
+          <button class="preset-btn" data-sec="2100">非言語<small>35分</small></button>
+        </div>
+        <select id="topicSelect" class="topic-select">
+          <option value="" disabled selected>分野を選択（任意）</option>
+          <optgroup label="非言語">
+            <option value="非言語 › 推論">推論</option>
+            <option value="非言語 › 集合">集合</option>
+            <option value="非言語 › 確率">確率</option>
+            <option value="非言語 › 割合・比">割合・比</option>
+            <option value="非言語 › 速さ">速さ</option>
+            <option value="非言語 › 料金・割引">料金・割引</option>
+            <option value="非言語 › 図表読み取り">図表読み取り</option>
+            <option value="非言語 › 整数の性質">整数の性質</option>
+            <option value="非言語 › 仕事算">仕事算</option>
+          </optgroup>
+          <optgroup label="言語">
+            <option value="言語 › 語彙">語彙</option>
+            <option value="言語 › 慣用句・ことわざ">慣用句・ことわざ</option>
+            <option value="言語 › 文章整序">文章整序</option>
+            <option value="言語 › 長文読解">長文読解</option>
+          </optgroup>
+          <optgroup label="英語">
+            <option value="英語 › 語彙">語彙</option>
+            <option value="英語 › 文法">文法</option>
+            <option value="英語 › 長文読解">長文読解</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="controls-area">
+        <div class="controls">
+          <button class="btn btn-lap" id="lapBtn" disabled>LAP</button>
+          <button class="btn btn-start" id="startBtn">START</button>
+          <button class="btn btn-reset" id="resetBtn">RESET</button>
+        </div>
+        <div class="kbd-hints">
+          <span><kbd>SPACE</kbd> スタート / ストップ</span>
+          <span><kbd>ENTER</kbd> <span id="lapHint">ラップ</span></span>
+          <span><kbd>DEL</kbd> / <kbd>BS</kbd> リセット</span>
+        </div>
+      </div>
+
+      <div class="q-tracker hidden" id="qTracker">
+        <span id="qCount">0問</span>
+        <span class="q-sep">·</span>
+        <span id="qPace">平均 --</span>
+      </div>
+
+      <div class="laps" id="lapsContainer">
+        <table id="lapTable" class="hidden">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th id="lapColLabel">ラップ</th>
+              <th>累計</th>
+              <th id="scoreColHeader" class="hidden">採点</th>
+            </tr>
+          </thead>
+          <tbody id="lapBody"></tbody>
+        </table>
+        <button class="save-btn hidden" id="saveBtn">この結果を保存</button>
       </div>
     </div>
 
-    <div class="controls-area">
-      <div class="controls">
-        <button class="btn btn-lap" id="lapBtn" disabled>LAP</button>
-        <button class="btn btn-start" id="startBtn">START</button>
-        <button class="btn btn-reset" id="resetBtn">RESET</button>
-      </div>
-      <div class="kbd-hints">
-        <span><kbd>SPACE</kbd> スタート / ストップ</span>
-        <span><kbd>ENTER</kbd> <span id="lapHint">ラップ</span></span>
-        <span><kbd>DEL</kbd> / <kbd>BS</kbd> リセット</span>
-      </div>
-    </div>
-
-    <div class="q-tracker hidden" id="qTracker">
-      <span id="qCount">0問</span>
-      <span class="q-sep">·</span>
-      <span id="qPace">平均 --</span>
-    </div>
-
-    <div class="laps" id="lapsContainer">
-      <table id="lapTable" class="hidden">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th id="lapColLabel">ラップ</th>
-            <th>累計</th>
-          </tr>
-        </thead>
-        <tbody id="lapBody"></tbody>
-      </table>
-    </div>
+    <div id="statsSection" class="hidden"></div>
   </div>
 
   <script src="script.js"></script>
