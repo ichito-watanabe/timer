@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPI Timer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="timer-display" id="display">00:00.0</div>
+
+    <div class="controls">
+      <button class="btn btn-lap" id="lapBtn" disabled>LAP</button>
+      <button class="btn btn-start" id="startBtn">START</button>
+      <button class="btn btn-reset" id="resetBtn">RESET</button>
+    </div>
+
+    <div class="laps" id="lapsContainer">
+      <table id="lapTable" class="hidden">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ラップ</th>
+            <th>累計</th>
+          </tr>
+        </thead>
+        <tbody id="lapBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

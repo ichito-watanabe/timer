@@ -1,0 +1,149 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0a0a0a;
+  color: #e8e8e8;
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+.timer-display {
+  font-size: clamp(64px, 18vw, 96px);
+  font-weight: 200;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  line-height: 1;
+  user-select: none;
+}
+
+.controls {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.btn {
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background 0.15s, color 0.15s, opacity 0.15s;
+  user-select: none;
+}
+
+.btn-lap,
+.btn-reset {
+  width: 72px;
+  height: 72px;
+  background: #1e1e1e;
+  color: #888;
+}
+
+.btn-lap:not(:disabled):hover,
+.btn-reset:hover {
+  background: #2a2a2a;
+  color: #ccc;
+}
+
+.btn-lap:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.btn-start {
+  width: 88px;
+  height: 88px;
+  background: #1e1e1e;
+  color: #e8e8e8;
+  font-size: 14px;
+}
+
+.btn-start:hover {
+  background: #2a2a2a;
+}
+
+.btn-start.running {
+  color: #ff6b6b;
+}
+
+.laps {
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: #444;
+  text-transform: uppercase;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #1e1e1e;
+  text-align: right;
+}
+
+thead th:first-child {
+  text-align: left;
+}
+
+tbody tr {
+  border-bottom: 1px solid #111;
+  transition: background 0.1s;
+}
+
+tbody tr:hover {
+  background: #111;
+}
+
+tbody td {
+  padding: 12px 0;
+  font-size: 15px;
+  text-align: right;
+  color: #888;
+  letter-spacing: 0.05em;
+}
+
+tbody td:first-child {
+  text-align: left;
+  color: #444;
+  font-size: 12px;
+}
+
+tbody td.lap-time {
+  color: #e8e8e8;
+}
+
+tbody tr.slowest td.lap-time {
+  color: #ff6b6b;
+}
+
+tbody tr.fastest td.lap-time {
+  color: #6bffb8;
+}
