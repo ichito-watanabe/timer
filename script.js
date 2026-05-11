@@ -79,15 +79,16 @@ function tick() {
   } else {
     const remaining = countdownDuration - elapsed;
     if (remaining <= 0) {
-      display.textContent = '00:00.0';
+      display.textContent = '-' + formatTime(-remaining);
       progressFill.style.width = '0%';
-      stop();
-      beep();
-      display.classList.add('expired');
-      return;
+      progressFill.classList.remove('warning');
+      progressFill.classList.add('danger');
+      display.classList.remove('warn');
+      display.classList.add('danger');
+    } else {
+      display.textContent = formatTime(remaining);
+      updateWarning(remaining);
     }
-    display.textContent = formatTime(remaining);
-    updateWarning(remaining);
   }
   animFrame = requestAnimationFrame(tick);
 }
