@@ -23,6 +23,7 @@
       </div>
 
       <div class="cd-config hidden" id="cdConfig">
+        <p class="section-label">時間設定</p>
         <div class="presets">
           <button class="preset-btn" data-sec="30">30秒</button>
           <button class="preset-btn" data-sec="60">1分</button>
@@ -43,6 +44,7 @@
       </div>
 
       <div class="topic-area">
+        <p class="section-label">分野</p>
         <select id="topicSelect" class="topic-select">
           <option value="" disabled selected>分野を選択（任意）</option>
           <optgroup label="非言語">
@@ -77,11 +79,15 @@
           <button class="btn btn-reset" id="resetBtn">RESET</button>
         </div>
         <div class="kbd-hints">
-          <span><kbd>SPACE</kbd> スタート / ストップ</span>
-          <span><kbd>ENTER</kbd> <span id="lapHint">ラップ</span></span>
-          <span><kbd>O</kbd> 直近ラップ ○</span>
-          <span><kbd>X</kbd> 直近ラップ ✗</span>
-          <span><kbd>DEL</kbd> / <kbd>BS</kbd> リセット</span>
+          <div class="kbd-row">
+            <span><kbd>SPACE</kbd> スタート / ストップ</span>
+            <span><kbd>ENTER</kbd> <span id="lapHint">ラップ</span></span>
+          </div>
+          <div class="kbd-row">
+            <span><kbd>O</kbd> 直近ラップ ○</span>
+            <span><kbd>X</kbd> 直近ラップ ✗</span>
+            <span><kbd>DEL</kbd> / <kbd>BS</kbd> リセット</span>
+          </div>
         </div>
       </div>
 

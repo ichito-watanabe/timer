@@ -40,7 +40,7 @@ body {
   font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 8px 18px;
+  padding: 8px 14px;
   border-radius: 100px;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
@@ -61,7 +61,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  gap: 28px;
 }
 
 /* ===== Display area ===== */
@@ -115,12 +115,21 @@ body {
   50% { opacity: 0.2; }
 }
 
+/* ===== Section label ===== */
+.section-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #252525;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
 /* ===== Countdown config ===== */
 .cd-config {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .presets {
@@ -165,8 +174,6 @@ body {
 }
 
 .preset-btn.selected small { color: #4dcc96; }
-
-.topic-area { width: 100%; }
 
 .time-builder {
   display: flex;
@@ -213,6 +220,14 @@ body {
 .time-clear-btn:hover:not(:disabled) { border-color: #ff6b6b; color: #ff6b6b; }
 .time-clear-btn:disabled { opacity: 0.3; cursor: default; }
 
+/* ===== Topic area ===== */
+.topic-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
 .topic-select {
   width: 100%;
   background: #0a0a0a;
@@ -247,12 +262,17 @@ body {
 
 .kbd-hints {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
   font-size: 11px;
-  color: #333;
+  color: #2e2e2e;
   letter-spacing: 0.08em;
+}
+
+.kbd-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
 
 kbd {
@@ -450,12 +470,12 @@ tbody tr.fastest td.lap-time { color: #6bffb8; }
   letter-spacing: 0.05em;
 }
 
-.stats-table {
+#statsSection table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.stats-table thead th {
+#statsSection thead th {
   font-size: 11px;
   letter-spacing: 0.12em;
   color: #333;
@@ -465,37 +485,31 @@ tbody tr.fastest td.lap-time { color: #6bffb8; }
   text-align: right;
 }
 
-.stats-table thead th:first-child { text-align: left; }
+#statsSection thead th:first-child { text-align: left; }
 
-.stats-table tbody tr {
-  border-bottom: 1px solid #111;
-}
-
-.stats-table tbody td {
+#statsSection tbody td {
   padding: 10px 0;
   text-align: right;
   font-size: 13px;
   color: #555;
 }
 
-.stat-topic {
-  text-align: left !important;
-  color: #888 !important;
-  font-size: 12px !important;
+#statsSection tbody td:first-child {
+  text-align: left;
+  color: #888;
+  font-size: 12px;
   letter-spacing: 0.03em;
 }
 
-.stat-score { color: #555 !important; }
+.stat-pct { font-size: 14px; font-weight: 400; }
 
-.stat-pct { font-size: 14px !important; font-weight: 400; }
-
-tr.good .stat-pct { color: #6bffb8 !important; }
-tr.ok  .stat-pct  { color: #ffb347 !important; }
-tr.bad .stat-pct  { color: #ff6b6b !important; }
+tr.good .stat-pct { color: #6bffb8; }
+tr.ok  .stat-pct  { color: #ffb347; }
+tr.bad .stat-pct  { color: #ff6b6b; }
 
 .stat-bar-cell {
   width: 60px;
-  padding-left: 12px !important;
+  padding-left: 12px;
 }
 
 .stat-bar-fill {
@@ -523,3 +537,14 @@ tr.bad .stat-bar-fill { background: #ff6b6b; }
 }
 
 .clear-btn:hover { border-color: #ff6b6b; color: #ff6b6b; }
+
+/* ===== Responsive ===== */
+@media (max-width: 400px) {
+  .container {
+    padding: 24px 16px;
+  }
+
+  .mode-btn {
+    padding: 7px 10px;
+  }
+}
