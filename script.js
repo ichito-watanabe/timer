@@ -18,6 +18,7 @@ const qCountEl        = document.getElementById('qCount');
 const qPaceEl         = document.getElementById('qPace');
 const topicSelect     = document.getElementById('topicSelect');
 const saveBtn         = document.getElementById('saveBtn');
+const timeClearBtn    = document.getElementById('timeClearBtn');
 const timerSection    = document.getElementById('timerSection');
 const statsSection    = document.getElementById('statsSection');
 
@@ -93,12 +94,18 @@ function tick() {
   animFrame = requestAnimationFrame(tick);
 }
 
+function setTimeBuilderDisabled(disabled) {
+  document.querySelectorAll('.add-btn').forEach(b => b.disabled = disabled);
+  if (timeClearBtn) timeClearBtn.disabled = disabled;
+}
+
 function stop() {
   cancelAnimationFrame(animFrame);
   running = false;
   startBtn.textContent = 'START';
   startBtn.classList.remove('running');
   lapBtn.disabled = true;
+  setTimeBuilderDisabled(false);
   updateSaveBtn();
 }
 
@@ -110,6 +117,7 @@ function start() {
   startBtn.textContent = 'STOP';
   startBtn.classList.add('running');
   lapBtn.disabled = false;
+  setTimeBuilderDisabled(true);
   updateSaveBtn();
 }
 
@@ -337,6 +345,41 @@ function setMode(newMode) {
     qPaceEl.textContent = '平均 --';
   }
 }
+
+document.querySelectorAll('.add-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (running) return;
+    countdownDuration += parseInt(btn.dataset.ms);
+    elapsed = 0;
+    display.classList.remove('expired', 'warn', 'danger');
+    display.textContent = formatTime(countdownDuration);
+    progressFill.style.width = '100%';
+    progressFill.classList.remove('warning', 'danger');
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('selected'));
+    startBtn.disabled = false;
+    updateSaveBtn();
+  });
+});
+
+timeClearBtn.addEventListener('click', () => {
+  if (running) return;
+  countdownDuration = 0;
+  elapsed = 0;
+  laps = [];
+  questionCount = 0;
+  display.classList.remove('expired', 'warn', 'danger');
+  display.textContent = '00:00.0';
+  progressFill.style.width = '0%';
+  progressFill.classList.remove('warning', 'danger');
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('selected'));
+  lapBody.innerHTML = '';
+  lapTable.classList.add('hidden');
+  scoreColHeader.classList.add('hidden');
+  qCountEl.textContent = '0問';
+  qPaceEl.textContent = '平均 --';
+  startBtn.disabled = true;
+  updateSaveBtn();
+});
 
 document.querySelectorAll('.preset-btn').forEach(btn => {
   btn.addEventListener('click', () => {

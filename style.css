@@ -168,6 +168,51 @@ body {
 
 .topic-area { width: 100%; }
 
+.time-builder {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.add-btns {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+}
+
+.add-btn {
+  flex: 1;
+  border: 1px solid #1e1e1e;
+  background: transparent;
+  color: #666;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  padding: 7px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.add-btn:hover:not(:disabled) { border-color: #6bffb8; color: #6bffb8; }
+.add-btn:disabled { opacity: 0.3; cursor: default; }
+
+.time-clear-btn {
+  border: 1px solid #1e1e1e;
+  background: transparent;
+  color: #444;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.time-clear-btn:hover:not(:disabled) { border-color: #ff6b6b; color: #ff6b6b; }
+.time-clear-btn:disabled { opacity: 0.3; cursor: default; }
+
 .topic-select {
   width: 100%;
   background: #0a0a0a;
