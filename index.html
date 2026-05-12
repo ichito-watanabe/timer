@@ -80,14 +80,21 @@
           <button class="btn btn-reset" id="resetBtn">RESET</button>
         </div>
         <div class="kbd-hints">
-          <div class="kbd-row">
-            <span><kbd>SPACE</kbd> スタート / ストップ</span>
-            <span><kbd>ENTER</kbd> <span id="lapHint">ラップ</span></span>
+          <div class="kbd-hint-row">
+            <div class="kbd-combo"><kbd>SPACE</kbd></div>
+            <div class="kbd-desc">スタート / ストップ</div>
           </div>
-          <div class="kbd-row">
-            <span><kbd>O</kbd> 直近ラップ ○</span>
-            <span><kbd>X</kbd> 直近ラップ ✗</span>
-            <span><kbd>DEL</kbd> / <kbd>BS</kbd> リセット</span>
+          <div class="kbd-hint-row">
+            <div class="kbd-combo"><kbd>ENTER</kbd></div>
+            <div class="kbd-desc" id="lapHint">ラップ</div>
+          </div>
+          <div class="kbd-hint-row">
+            <div class="kbd-combo"><kbd>O</kbd><span class="kbd-sep">/</span><kbd>X</kbd></div>
+            <div class="kbd-desc">直近ラップ ○ / ✗</div>
+          </div>
+          <div class="kbd-hint-row">
+            <div class="kbd-combo"><kbd>DEL</kbd><span class="kbd-sep">/</span><kbd>BS</kbd></div>
+            <div class="kbd-desc">リセット</div>
           </div>
         </div>
       </div>
