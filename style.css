@@ -572,6 +572,27 @@ tr.bad .stat-bar-fill { background: #ff6b6b; }
 
 .clear-btn:hover { border-color: #ff6b6b; color: #ff6b6b; }
 
+/* ===== Undo bar ===== */
+.undo-bar {
+  display: flex;
+  justify-content: center;
+}
+
+.undo-btn {
+  background: transparent;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: #888;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.undo-btn:hover { border-color: #aaa; color: #e8e8e8; }
+
 /* ===== Responsive ===== */
 @media (max-width: 400px) {
   .container {

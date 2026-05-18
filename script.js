@@ -21,6 +21,8 @@ const saveBtn         = document.getElementById('saveBtn');
 const timeClearBtn    = document.getElementById('timeClearBtn');
 const timerSection    = document.getElementById('timerSection');
 const statsSection    = document.getElementById('statsSection');
+const undoBar         = document.getElementById('undoBar');
+const undoBtn         = document.getElementById('undoBtn');
 
 let mode = 'stopwatch';
 let countdownDuration = 0;
@@ -31,6 +33,8 @@ let animFrame = null;
 let laps = [];
 let questionCount = 0;
 let selectedTopic = '';
+let snapshot = null;
+let undoTimer = null;
 
 function formatTime(ms) {
   if (ms < 0) ms = 0;
@@ -121,7 +125,64 @@ function start() {
   updateSaveBtn();
 }
 
+function showUndo() {
+  clearTimeout(undoTimer);
+  undoBar.classList.remove('hidden');
+  undoTimer = setTimeout(hideUndo, 5000);
+}
+
+function hideUndo() {
+  clearTimeout(undoTimer);
+  undoBar.classList.add('hidden');
+  snapshot = null;
+}
+
+function undoReset() {
+  if (!snapshot) return;
+  elapsed = snapshot.elapsed;
+  laps = snapshot.laps.map(l => ({ ...l }));
+  questionCount = snapshot.questionCount;
+
+  display.classList.remove('expired', 'warn', 'danger');
+  if (snapshot.displayWarn)   display.classList.add('warn');
+  if (snapshot.displayDanger) display.classList.add('danger');
+
+  if (mode === 'stopwatch') {
+    display.textContent = formatTime(elapsed);
+  } else {
+    const remaining = countdownDuration - elapsed;
+    if (remaining <= 0) {
+      display.textContent = '-' + formatTime(-remaining);
+      progressFill.style.width = '0%';
+      progressFill.classList.remove('warning');
+      progressFill.classList.add('danger');
+    } else {
+      display.textContent = formatTime(remaining);
+      updateWarning(remaining);
+    }
+    qCountEl.textContent = questionCount > 0 ? `${questionCount}問完了` : '0問';
+    qPaceEl.textContent  = questionCount > 0 ? `平均 ${formatTime(elapsed / questionCount)}/問` : '平均 --';
+  }
+
+  if (laps.length > 0) renderLaps();
+
+  hideUndo();
+}
+
 function reset() {
+  if (elapsed > 0 || laps.length > 0) {
+    snapshot = {
+      elapsed,
+      laps: laps.map(l => ({ ...l })),
+      questionCount,
+      displayWarn:   display.classList.contains('warn'),
+      displayDanger: display.classList.contains('danger'),
+    };
+    showUndo();
+  } else {
+    hideUndo();
+  }
+
   if (laps.some(l => l.result !== null) && selectedTopic !== '') {
     commitResults();
   }
@@ -422,6 +483,7 @@ saveBtn.addEventListener('click', saveResults);
 startBtn.addEventListener('click', () => running ? stop() : start());
 lapBtn.addEventListener('click', () => { if (!lapBtn.disabled) lap(); });
 resetBtn.addEventListener('click', reset);
+undoBtn.addEventListener('click', undoReset);
 swModeBtn.addEventListener('click', () => setMode('stopwatch'));
 cdModeBtn.addEventListener('click', () => setMode('countdown'));
 statsModeBtn.addEventListener('click', () => setMode('stats'));
@@ -431,6 +493,9 @@ document.addEventListener('keydown', e => {
   if (e.key === ' ') {
     e.preventDefault();
     running ? stop() : start();
+  } else if ((e.key === 'z' || e.key === 'Z') && e.ctrlKey) {
+    e.preventDefault();
+    undoReset();
   } else if (e.key === 'Delete' || e.key === 'Backspace') {
     e.preventDefault();
     reset();
