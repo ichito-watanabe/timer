@@ -23,6 +23,7 @@ const timerSection    = document.getElementById('timerSection');
 const statsSection    = document.getElementById('statsSection');
 const undoBar         = document.getElementById('undoBar');
 const undoBtn         = document.getElementById('undoBtn');
+const importInput     = document.getElementById('importInput');
 
 let mode = 'stopwatch';
 let countdownDuration = 0;
@@ -298,6 +299,48 @@ function saveResults() {
   }, 2000);
 }
 
+function exportHistory() {
+  const history = JSON.parse(localStorage.getItem('spiHistory') || '[]');
+  if (history.length === 0) return;
+  const blob = new Blob([JSON.stringify(history, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `spi-history-${new Date().toISOString().slice(0, 10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importHistory(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!Array.isArray(data) || !data.every(s =>
+        s.date && s.topic && typeof s.correct === 'number' && typeof s.total === 'number'
+      )) throw new Error();
+
+      const existing = JSON.parse(localStorage.getItem('spiHistory') || '[]');
+      let merged;
+      if (existing.length > 0) {
+        const doMerge = confirm(
+          `${data.length}件の記録をインポートします。\n既存の記録（${existing.length}件）に追加しますか？\n\n「キャンセル」で既存の記録を置き換えます。`
+        );
+        merged = doMerge ? [...existing, ...data] : data;
+      } else {
+        merged = data;
+      }
+
+      localStorage.setItem('spiHistory', JSON.stringify(merged));
+      renderStats();
+    } catch {
+      alert('読み込みに失敗しました。正しいエクスポートファイルを選択してください。');
+    }
+    importInput.value = '';
+  };
+  reader.readAsText(file);
+}
+
 function renderStats() {
   const history = JSON.parse(localStorage.getItem('spiHistory') || '[]');
 
@@ -305,7 +348,11 @@ function renderStats() {
     statsSection.innerHTML = `
       <p class="stats-empty">まだ記録がありません</p>
       <p class="stats-hint">カウントダウンモードで分野を選んで練習後、採点して保存してください</p>
+      <div class="stats-actions">
+        <button class="stats-btn" id="importBtn">↑ インポート</button>
+      </div>
     `;
+    document.getElementById('importBtn').addEventListener('click', () => importInput.click());
     return;
   }
 
@@ -338,9 +385,15 @@ function renderStats() {
       <thead><tr><th>分野</th><th>正解</th><th>正答率</th><th></th></tr></thead>
       <tbody>${rows}</tbody>
     </table>
-    <button class="clear-btn" id="clearBtn">記録を全削除</button>
+    <div class="stats-actions">
+      <button class="stats-btn" id="exportBtn">↓ エクスポート</button>
+      <button class="stats-btn" id="importBtn">↑ インポート</button>
+      <button class="stats-btn danger" id="clearBtn">全削除</button>
+    </div>
   `;
 
+  document.getElementById('exportBtn').addEventListener('click', exportHistory);
+  document.getElementById('importBtn').addEventListener('click', () => importInput.click());
   document.getElementById('clearBtn').addEventListener('click', () => {
     if (confirm('全ての記録を削除しますか？')) {
       localStorage.removeItem('spiHistory');
@@ -484,6 +537,9 @@ startBtn.addEventListener('click', () => running ? stop() : start());
 lapBtn.addEventListener('click', () => { if (!lapBtn.disabled) lap(); });
 resetBtn.addEventListener('click', reset);
 undoBtn.addEventListener('click', undoReset);
+importInput.addEventListener('change', () => {
+  if (importInput.files[0]) importHistory(importInput.files[0]);
+});
 swModeBtn.addEventListener('click', () => setMode('stopwatch'));
 cdModeBtn.addEventListener('click', () => setMode('countdown'));
 statsModeBtn.addEventListener('click', () => setMode('stats'));

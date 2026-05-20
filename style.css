@@ -556,13 +556,19 @@ tr.bad .stat-pct  { color: #ff6b6b; }
 tr.ok  .stat-bar-fill { background: #ffb347; }
 tr.bad .stat-bar-fill { background: #ff6b6b; }
 
-.clear-btn {
-  align-self: center;
-  padding: 6px 16px;
+.stats-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stats-btn {
+  padding: 6px 14px;
   background: transparent;
-  border: 1px solid #555;
+  border: 1px solid #333;
   border-radius: 6px;
-  color: #ccc;
+  color: #888;
   font-family: inherit;
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -570,7 +576,8 @@ tr.bad .stat-bar-fill { background: #ff6b6b; }
   transition: border-color 0.15s, color 0.15s;
 }
 
-.clear-btn:hover { border-color: #ff6b6b; color: #ff6b6b; }
+.stats-btn:hover { border-color: #aaa; color: #ccc; }
+.stats-btn.danger:hover { border-color: #ff6b6b; color: #ff6b6b; }
 
 /* ===== Undo bar ===== */
 .undo-bar {
