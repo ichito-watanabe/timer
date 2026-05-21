@@ -180,7 +180,7 @@ function reset() {
       displayDanger: display.classList.contains('danger'),
     };
     showUndo();
-  } else {
+  } else if (!snapshot) {
     hideUndo();
   }
 
