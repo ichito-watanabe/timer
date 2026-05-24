@@ -520,6 +520,7 @@ document.querySelectorAll('.preset-btn').forEach(btn => {
 
 topicSelect.addEventListener('change', () => {
   selectedTopic = topicSelect.value;
+  topicSelect.blur();
   updateSaveBtn();
 });
 

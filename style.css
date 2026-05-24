@@ -365,7 +365,7 @@ kbd {
 /* ===== Lap table ===== */
 .laps { width: 100%; }
 
-.hidden { display: none; }
+.hidden { display: none !important; }
 
 table {
   width: 100%;
