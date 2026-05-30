@@ -27,10 +27,12 @@ const importInput     = document.getElementById('importInput');
 
 // ===== Theme =====
 (function initTheme() {
-  const saved = localStorage.getItem('theme') || 'emerald';
-  document.documentElement.dataset.theme = saved;
+  const VALID = ['light', 'light-rose', 'light-sky', 'emerald', 'rose', 'gold'];
+  const saved = localStorage.getItem('theme');
+  const theme = VALID.includes(saved) ? saved : 'emerald';
+  document.documentElement.dataset.theme = theme;
   document.querySelectorAll('.theme-dot').forEach(dot => {
-    dot.classList.toggle('active', dot.dataset.theme === saved);
+    dot.classList.toggle('active', dot.dataset.theme === theme);
     dot.addEventListener('click', () => {
       const t = dot.dataset.theme;
       document.documentElement.dataset.theme = t;
