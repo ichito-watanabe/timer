@@ -25,6 +25,23 @@ const undoBar         = document.getElementById('undoBar');
 const undoBtn         = document.getElementById('undoBtn');
 const importInput     = document.getElementById('importInput');
 
+// ===== Theme =====
+(function initTheme() {
+  const saved = localStorage.getItem('theme') || 'emerald';
+  document.documentElement.dataset.theme = saved;
+  document.querySelectorAll('.theme-dot').forEach(dot => {
+    dot.classList.toggle('active', dot.dataset.theme === saved);
+    dot.addEventListener('click', () => {
+      const t = dot.dataset.theme;
+      document.documentElement.dataset.theme = t;
+      localStorage.setItem('theme', t);
+      document.querySelectorAll('.theme-dot').forEach(d =>
+        d.classList.toggle('active', d.dataset.theme === t)
+      );
+    });
+  });
+})();
+
 let mode = 'stopwatch';
 let countdownDuration = 0;
 let running = false;
