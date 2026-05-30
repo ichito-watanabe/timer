@@ -1,31 +1,56 @@
 :root {
-  --accent: #7fffd4;
-  --accent-rgb: 127, 255, 212;
-  --accent-muted: #5bc4b0;
+  --accent:      #7fffd4;
+  --accent-rgb:  127, 255, 212;
+  --accent-muted:#5bc4b0;
+  --bg:          #000000;
+  --base:        #0d0d0d;
+  --surface:     #1e1e1e;
+  --raised:      #2a2a2a;
+  --line:        #333333;
 }
 
 html[data-theme="rose"] {
-  --accent: #ff8fab;
-  --accent-rgb: 255, 143, 171;
-  --accent-muted: #cc607a;
+  --accent:      #ff8fab;
+  --accent-rgb:  255, 143, 171;
+  --accent-muted:#cc607a;
+  --bg:          #0a0607;
+  --base:        #140b0e;
+  --surface:     #26151a;
+  --raised:      #331d22;
+  --line:        #40242b;
 }
 
 html[data-theme="sky"] {
-  --accent: #87ceeb;
-  --accent-rgb: 135, 206, 235;
-  --accent-muted: #5ba0be;
+  --accent:      #87ceeb;
+  --accent-rgb:  135, 206, 235;
+  --accent-muted:#5ba0be;
+  --bg:          #050809;
+  --base:        #0b1013;
+  --surface:     #141f23;
+  --raised:      #1b292f;
+  --line:        #22343b;
 }
 
 html[data-theme="gold"] {
-  --accent: #ffd56b;
-  --accent-rgb: 255, 213, 107;
-  --accent-muted: #cca840;
+  --accent:      #ffd56b;
+  --accent-rgb:  255, 213, 107;
+  --accent-muted:#cca840;
+  --bg:          #0a0904;
+  --base:        #141109;
+  --surface:     #262010;
+  --raised:      #332b15;
+  --line:        #40351b;
 }
 
 html[data-theme="lavender"] {
-  --accent: #c8a2f0;
-  --accent-rgb: 200, 162, 240;
-  --accent-muted: #9a70c0;
+  --accent:      #c8a2f0;
+  --accent-rgb:  200, 162, 240;
+  --accent-muted:#9a70c0;
+  --bg:          #08060a;
+  --base:        #100d13;
+  --surface:     #1e1824;
+  --raised:      #282030;
+  --line:        #32293c;
 }
 
 *, *::before, *::after {
@@ -35,7 +60,7 @@ html[data-theme="lavender"] {
 }
 
 body {
-  background: #000000;
+  background: var(--bg);
   color: #e8e8e8;
   font-family: 'Courier New', Courier, monospace;
   min-height: 100dvh;
@@ -57,7 +82,7 @@ body {
 /* ===== Mode toggle ===== */
 .mode-toggle {
   display: flex;
-  background: #0d0d0d;
+  background: var(--base);
   border-radius: 100px;
   padding: 3px;
 }
@@ -77,8 +102,8 @@ body {
 }
 
 .mode-btn.active {
-  background: #1e1e1e;
-  color: #e8e8e8;
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent);
 }
 
 .mode-btn:hover:not(.active) {
@@ -106,7 +131,7 @@ body {
 .progress-bar {
   width: 100%;
   height: 2px;
-  background: #1a1a1a;
+  background: var(--surface);
   border-radius: 1px;
   overflow: hidden;
 }
@@ -170,7 +195,7 @@ body {
 }
 
 .preset-btn {
-  border: 1px solid #1e1e1e;
+  border: 1px solid var(--surface);
   background: transparent;
   color: #666;
   font-family: inherit;
@@ -194,7 +219,7 @@ body {
   transition: color 0.15s;
 }
 
-.preset-btn:hover { border-color: #333; color: #aaa; }
+.preset-btn:hover { border-color: var(--line); color: #aaa; }
 .preset-btn:hover small { color: #555; }
 
 .preset-btn.selected {
@@ -219,7 +244,7 @@ body {
 
 .add-btn {
   flex: 1;
-  border: 1px solid #1e1e1e;
+  border: 1px solid var(--surface);
   background: transparent;
   color: #666;
   font-family: inherit;
@@ -235,7 +260,7 @@ body {
 .add-btn:disabled { opacity: 0.3; cursor: default; }
 
 .time-clear-btn {
-  border: 1px solid #1e1e1e;
+  border: 1px solid var(--surface);
   background: transparent;
   color: #444;
   font-family: inherit;
@@ -260,8 +285,8 @@ body {
 
 .topic-select {
   width: 100%;
-  background: #000000;
-  border: 1px solid #1e1e1e;
+  background: var(--bg);
+  border: 1px solid var(--surface);
   color: #666;
   font-family: inherit;
   font-size: 12px;
@@ -273,8 +298,8 @@ body {
   transition: border-color 0.15s, color 0.15s;
 }
 
-.topic-select:focus { border-color: #333; color: #aaa; }
-.topic-select option, .topic-select optgroup { background: #0d0d0d; }
+.topic-select:focus { border-color: var(--line); color: #aaa; }
+.topic-select option, .topic-select optgroup { background: var(--base); }
 
 /* ===== Controls ===== */
 .controls-area {
@@ -305,7 +330,7 @@ body {
   align-items: center;
   gap: 5px;
   padding: 0 10px;
-  border-right: 1px solid #1e1e1e;
+  border-right: 1px solid var(--surface);
 }
 
 .kbd-hint-row:last-child {
@@ -333,7 +358,7 @@ body {
 
 kbd {
   background: transparent;
-  border: 1px solid #282828;
+  border: 1px solid var(--surface);
   border-radius: 3px;
   padding: 1px 5px;
   font-family: inherit;
@@ -358,24 +383,24 @@ kbd {
 .btn-lap, .btn-reset {
   width: 72px;
   height: 72px;
-  background: #1e1e1e;
+  background: var(--surface);
   color: #888;
 }
 
 .btn-lap:not(:disabled):hover,
-.btn-reset:hover { background: #2a2a2a; color: #ccc; }
+.btn-reset:hover { background: var(--raised); color: #ccc; }
 
 .btn-lap:disabled { opacity: 0.3; cursor: default; }
 
 .btn-start {
   width: 88px;
   height: 88px;
-  background: #1e1e1e;
+  background: var(--surface);
   color: #e8e8e8;
   font-size: 14px;
 }
 
-.btn-start:hover:not(:disabled) { background: #2a2a2a; }
+.btn-start:hover:not(:disabled) { background: var(--raised); }
 .btn-start:disabled { opacity: 0.3; cursor: default; }
 .btn-start.running { color: #ff6b6b; }
 
@@ -408,18 +433,18 @@ thead th {
   color: #444;
   text-transform: uppercase;
   padding-bottom: 12px;
-  border-bottom: 1px solid #1e1e1e;
+  border-bottom: 1px solid var(--surface);
   text-align: right;
 }
 
 thead th:first-child { text-align: left; }
 
 tbody tr {
-  border-bottom: 1px solid #0d0d0d;
+  border-bottom: 1px solid var(--base);
   transition: background 0.1s;
 }
 
-tbody tr:hover { background: #0d0d0d; }
+tbody tr:hover { background: var(--base); }
 
 tbody td {
   padding: 10px 0;
@@ -484,7 +509,7 @@ tbody tr.fastest td.lap-time { color: var(--accent); }
   width: 100%;
   padding: 10px;
   background: transparent;
-  border: 1px solid #2a2a2a;
+  border: 1px solid var(--surface);
   border-radius: 8px;
   color: #666;
   font-family: inherit;
@@ -538,7 +563,7 @@ tbody tr.fastest td.lap-time { color: var(--accent); }
   color: #aaa;
   text-transform: uppercase;
   padding-bottom: 10px;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--line);
   text-align: right;
 }
 
@@ -589,7 +614,7 @@ tr.bad .stat-bar-fill { background: #ff6b6b; }
 .stats-btn {
   padding: 6px 14px;
   background: transparent;
-  border: 1px solid #333;
+  border: 1px solid var(--line);
   border-radius: 6px;
   color: #888;
   font-family: inherit;
@@ -610,7 +635,7 @@ tr.bad .stat-bar-fill { background: #ff6b6b; }
 
 .undo-btn {
   background: transparent;
-  border: 1px solid #333;
+  border: 1px solid var(--line);
   border-radius: 6px;
   color: #888;
   font-family: inherit;
